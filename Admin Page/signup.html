@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Account | Havilla</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <div class="flex w-full max-w-4xl min-h-[600px] bg-white rounded-2xl overflow-hidden shadow-lg">
+
+        <!-- LEFT: venue image -->
+        <div class="hidden md:block w-2/5 relative">
+                <img src="../Images/Rectangle 112.png" alt="Venue" class="w-full h-full object-cover">
+        </div>
+
+        <!-- RIGHT: form -->
+        <div class="w-full md:w-3/5 px-10 py-10 flex flex-col justify-center">
+
+                <nav class="md:hidden flex items-center justify-between py-2 mb-6 ">
+                    <div class="flex justify-center items-center gap-2">
+                    <img src="/Images/Logo.png" alt="Logo">
+                    <p class="text-[#0A243F] font-bold text-lg">Havilla.</p>
+                    </div>
+                    <button id="menuBtn" onclick="toggleMenu()" class="md:hidden text-[#0A243F] text-2xl">☰</button>
+            </nav>
+
+            <div id="mobileMenu" class="hidden md:hidden flex-col gap-4 px-6 pb-4 text-sm bg-white">
+                <a class="text-[#0A243F] font-medium" href="#">Home</a>
+                <a class="text-[#0A243F] opacity-50" href="#">How it works</a>
+                <a class="text-[#0A243F] opacity-50" href="#">Features</a>
+                <a class="text-[#0A243F]" href="#">Sign in</a>
+            </div>
+
+
+            <!-- Logo -->
+            <div class="hidden md:flex items-center gap-2 mb-6">
+                <img src="../Images/Logo.png" alt="Logo" class="w-8 h-8">
+            </div>
+
+            <h2 class="text-2xl font-bold text-[#0A243F] mb-1">Create an Account</h2>
+            <p class="text-sm text-gray-500 mb-6">Set up your secure credentials to moderate listings, track live bookings, and review partner onboardings across Lagos.
+            </p>
+
+            <!-- Full Name -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-[#0A243F] mb-1">Full Name</label>
+                <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
+                    <input type="text" placeholder="Enter full name" class="w-full text-sm outline-none text-gray-700 placeholder-gray-400">
+                    <span class="text-gray-300 text-xs">›</span>
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-[#0A243F] mb-1">Email Address</label>
+                <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
+                    <input type="email" placeholder="Enter email address" class="w-full text-sm outline-none text-gray-700 placeholder-gray-400">
+                    <span class="text-gray-300 text-xs">›</span>
+                </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-[#0A243F] mb-1">Phone Number</label>
+                <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden">
+                    <div class="flex items-center gap-1 px-3 py-2 border-r border-gray-200 bg-gray-50">
+                        <span class="text-sm">🇳🇬</span>
+                        <span class="text-xs text-gray-500">▾</span>
+                    </div>
+                    <input type="tel" placeholder="(+234) -" class="w-full px-3 py-2 text-sm outline-none text-gray-700 placeholder-gray-400">
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-[#0A243F] mb-1">Password</label>
+                <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
+                    <input type="password" placeholder="Enter password" class="w-full text-sm outline-none text-gray-700 placeholder-gray-400">
+                    <span class="text-gray-400 text-sm cursor-pointer">👁</span>
+                </div>
+            </div>
+
+            <!-- Terms -->
+            <div class="flex items-center gap-2 mb-5">
+                <input type="checkbox" id="terms" class="w-4 h-4 accent-[#F4A160]">
+                <label for="terms" class="text-xs text-gray-500">
+                    I accept Havilla's <a href="#" class="text-[#114FF5] underline">Terms of Service</a> and <a href="#" class="text-[#114FF5] underline">Privacy Policy</a>
+                </label>
+            </div>
+
+            <!-- Continue button -->
+            <button class="w-full bg-[#a8c4e0] text-white py-3 rounded-lg text-sm font-medium mb-4 hover:bg-[#F4A160] transition-colors duration-200">
+                Continue
+            </button>
+
+            <!-- Divider -->
+            <div class="flex items-center gap-3 mb-4">
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <span class="text-xl text-gray-400">or</span>
+                <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+
+            <!-- Social login -->
+            <div class="flex justify-center gap-4 mb-5">
+                <button class="border border-gray-200 flex justify-center items-center md:w-64 w-28 h-10 hover:bg-gray-50">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
+                </button>
+                <button class="border border-gray-200 flex justify-center items-center md:w-64 w-28 h-10 hover:bg-gray-50">
+                    <img src="../Images/facebook.icon.png".svg" alt="Facebook" class="w-5 h-5">
+                </button>
+                <button class="border border-gray-200 flex justify-center items-center md:w-64 w-28 h-10 hover:bg-gray-50">
+                    <img src="../Images/Apple-icon.png" alt="Apple" class="w-5 h-5">
+                </button>
+            </div>
+
+            <!-- Login link -->
+            <p class="text-xs text-center text-gray-500">
+                Already have an account? <a href="login.html" class="text-[#0A243F] font-medium underline">Log In</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

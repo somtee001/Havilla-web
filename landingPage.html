@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Havilla</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+        }
+    </style>    
+</head>
+<body>
+
+    <nav class="flex items-center justify-between px-6 py-4">
+        <div class="flex justify-center items-center gap-2">
+            <img src="/Images/Logo.png" alt="Logo">
+            <p class="text-[#0A243F] font-bold text-lg">Havilla.</p>
+        </div>
+
+        <div class="hidden md:flex justify-center items-center gap-6 text-xs">
+            <a class="text-[#0A243F] font-medium" href="#">Home</a>
+            <a class="text-[#0A243F] opacity-50" href="#">How it works</a>
+            <a class="text-[#0A243F] opacity-50" href="#">Features</a>
+        </div>
+
+        <div class="hidden md:flex justify-center items-center gap-4 text-xs">
+            <button class="text-[#0A243F]">Sign in</button>
+            <button class="bg-[#F4A160] text-white px-4 py-2 rounded-md">Get Started</button>
+        </div>
+
+         <button id="menuBtn" onclick="toggleMenu()" class="md:hidden text-[#0A243F] text-2xl">☰</button>
+    </nav>
+    
+    <div id="mobileMenu" class="hidden md:hidden flex-col gap-4 px-6 pb-4 text-sm bg-white">
+        <a class="text-[#0A243F] font-medium" href="#">Home</a>
+        <a class="text-[#0A243F] opacity-50" href="#">How it works</a>
+        <a class="text-[#0A243F] opacity-50" href="#">Features</a>
+        <a class="text-[#0A243F]" href="#">Sign in</a>
+        <button class="bg-[#F4A160] text-white px-4 py-2 rounded-md w-fit">Get Started</button>
+    </div>
+
+    <!-- HERO -->
+    <section class="bg-[#0A243F] flex flex-col md:flex-row items-center">
+        <div class="text-white flex flex-col p-3 w-full md:w-1/2 md:ml-14 md:pl-10 gap-6">
+            <h1 class="text-2xl md:text-5xl font-bold leading-tight ">Find Your Perfect Venue in <span class="text-[#F4A160]">Minutes</span><span class="text-[#F4A160] md:text-white">.</span></h1>
+            <p class="text-sm tracking-wider opacity-80 md:w-3/4">Discover verified venues, confirm real-time availability, place secure holding deposits, and manage your bookings seamlessly.</p>
+            <div class="flex gap-4">
+                <button class="bg-[#F4A160] text-white px-4 py-2 rounded-md text-sm">Find a Venue</button>
+                <button class="border border-white text-white px-4 py-2 rounded-md text-sm">List Your Venue</button>
+            </div>
+        </div>
+
+        <div class="order-first md:order-last p-3 rounded-xl md:py-10 md:mr-14 w-full md:w-1/2">
+            <img class="md:mr-24" src="/Images/Hero image.png" alt="Hero Image">
+        </div>
+    </section>
+
+    <!-- STATS + HOW IT WORKS -->
+    <section class="md:px-10 md:pt-28 relative">
+
+        <!-- Stats bar -->
+        <div class="flex justify-center items-center gap-4 md:gap-10 mb-14 pt-4 border-b-2 border-r-2 border-l-2 border-gray-200 pb-6 mx-4 md:w-1/2 md:absolute md:top-0 md:-mt-6 md:left-1/2 md:transform md:-translate-x-1/2 bg-white rounded-xl">
+            <div class="text-center flex flex-col">
+                <p class="md:text-2xl md:font-bold text-[#0A243F]">500+</p>
+                <p class="text-[10px] md:text-xs text-gray-500 md:font-bold md:uppercase md:tracking-wide">Verified Venues</p>
+            </div>
+            <div class="text-center">
+                <p class="md:text-2xl md:font-bold text-[#0A243F]"> > 2hrs</p>
+                <p class="text-[10px] md:text-xs text-gray-500 md:font-bold md:uppercase md:tracking-wide">Avg. Search Time</p>
+            </div>
+            <div class="text-center">
+                <p class="md:text-2xl md:font-bold text-[#0A243F]">1,000+</p>
+                <p class="text-[10px] md:text-xs text-gray-500 md:font-bold md:uppercase md:tracking-wide">Events Booked</p>
+            </div>
+            <div class="text-center">
+                <p class="md:text-2xl md:font-bold text-[#0A243F]">4.8★</p>
+                <p class="text-[10px] md:text-xs text-gray-500 md:font-bold md:uppercase md:tracking-wide">User Rating</p>
+            </div>
+        </div>
+
+        <!-- How it works -->
+        <div class="text-center mb-10">
+            <span class="text-xs border border-gray-300 rounded-full px-3 py-1 text-gray-500">How It Works</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-[#0A243F] mt-3">Book in 3 Simple Steps</h2>
+            <p class="text-sm text-gray-500 mt-2">Havilla simplifies venue booking with real-time availability and seamless scheduling.</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-center items-center mb-10 gap-10 text-center">
+            <div class="flex flex-col items-center gap-3 max-w-xs">
+                <img class="w-14 h-14" src="/Images/div.step-icon.png" alt="search">
+                <p class="font-semibold text-[#0A243F]">Discover Venues</p>
+                <p class="text-sm text-gray-500 text">Filter by Lagos area, date, capacity, and price. Compare up to 3 venues side-by-side.</p>
+            </div>
+
+            <div class="flex flex-col items-center gap-3 max-w-xs">
+                <img class="w-14 h-14" src="/Images/div.step-icon (2).png" alt="Calendar">
+                <p class="font-semibold text-[#0A243F]">Check Live Calendar</p>
+                <p class="text-sm text-gray-500">See real-time availability. No more calling to ask "Is this date free?"</p>
+            </div>
+
+            <div class="flex flex-col items-center gap-3 max-w-xs">
+                <img class="w-14 h-14" src="/Images/div.step-icon (1).png" alt="quote">
+                <p class="font-semibold text-[#0A243F]">Quote & Secure</p>
+                <p class="text-sm text-gray-500">Request a quote, place a 48-hour hold, and pay your deposit to lock it down.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY HAVILLA -->
+    <section class="bg-[#0A243F] text-white px-6 py-14">
+        <div class="text-center mb-10">
+            <span class="text-xs border border-gray-500 rounded-full px-3 py-1 text-gray-400">Why Havilla?</span>
+            <h2 class="text-2xl md:text-3xl font-bold mt-3">Built For Modern Event Planning In Nigeria</h2>
+            <p class="text-xs md:text-[13px] md:text-center md:mx-auto md:w-1/2 opacity-70 mt-2 w-full">Havilla eliminates the stress of endless calls, delayed responses, hidden pricing, and unavailable dates by giving planners a faster, smarter, and more transparent booking experience.</p>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-center gap-6">
+            <div class="bg-[#112e4a] rounded-xl p-6 max-w-xs">
+                <div class="bg-[#F4A160] text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mb-4">1</div>
+                <h3 class="font-semibold mb-2">Discover Venues</h3>
+                <p class="text-sm opacity-70">Browse premium verified spaces using smart search filters.</p>
+            </div>
+
+            <div class="bg-[#112e4a] rounded-xl p-6 max-w-xs">
+                <div class="bg-[#F4A160] text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mb-4">2</div>
+                <h3 class="font-semibold mb-2">Check Availability</h3>
+                <p class="text-sm opacity-70">View live hourly availability before making payments.</p>
+            </div>
+
+            <div class="bg-[#112e4a] rounded-xl p-6 max-w-xs">
+                <div class="bg-[#F4A160] text-white w-8 h-8 rounded-full flex items-center justify-center font-bold mb-4">3</div>
+                <h3 class="font-semibold mb-2">Secure Booking</h3>
+                <p class="text-sm opacity-70">Pay holding deposits safely and manage bookings directly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="md:flex justify-center items-center md:py-14  border-none">
+        <div class="bg-[#0A243F] md:rounded-2xl text-white text-center md:px-32 md:py-10 px-6 py-14">
+            <h2 class="text-xl md:text-3xl md:font-bold mb-3">Start Booking Smarter With Havilla</h2>
+            <p class="text-[10px] md:w-10/12 md:mx-auto opacity-90 mb-6">Join planners and venue owners using a modern booking experience built on trust, speed, and transparency.</p>
+            <div class="flex justify-center gap-4">
+                <button class="bg-[#F4A160] text-white px-5 py-2 rounded-md text-sm">Explore Venues</button>
+                <button class="border border-white text-white px-5 py-2 rounded-md text-sm">List Your Venue</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="px-4 pt-10 border-t border-gray-200">
+        <div class="grid gap-4 grid-cols-3 md:grid-cols-5 md:gap-12 mb-8 w-full md:px-8">
+            <div class="">
+                <h4 class="font-semibold text-[#0A243F] mb-3">Product</h4>
+                <div class="flex flex-col gap-2 text-sm text-gray-500">
+                    <a href="#">Features</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">Security</a>
+                </div>
+            </div>
+
+            <div class="">
+                <h4 class="font-semibold text-[#0A243F] mb-3">Company</h4>
+                <div class="flex flex-col gap-2 text-sm text-gray-500">
+                    <a href="#">About</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+
+            <div class="">
+                <h4 class="font-semibold text-[#0A243F] mb-3">Resources</h4>
+                <div class="flex flex-col gap-2 text-sm text-gray-500">
+                    <a href="#">Help Center</a>
+                    <a href="#">Booking Guide</a>
+                </div>
+            </div>
+
+            <div class="">
+                <h4 class="font-semibold text-[#0A243F] mb-3">Legal</h4>
+                <div class="flex flex-col gap-2 text-sm text-gray-500">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms</a>
+                </div>
+            </div>
+
+            <div class="">
+                <h4 class="font-semibold text-[#0A243F] mb-3">Quick Action</h4>
+                <div class="flex flex-col gap-2 text-sm text-gray-500">
+                    <a href="#">Back to top</a>
+                    <a href="#">How it works</a>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-sm text-gray-400 text-center">© 2026 Havilla. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+    </script>
+</body>
+</html>

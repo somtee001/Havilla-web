@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification | Havilla</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 min-h-screen flex items-center justify-center">
+
+    <div class="bg-white rounded-2xl shadow-lg w-full max-w-lg px-10 py-8">
+
+        <nav class="md:hidden flex items-center justify-between py-2 mb-6 ">
+            <div class="flex justify-center items-center gap-2">
+                <img src="/Images/Logo.png" alt="Logo">
+                <p class="text-[#0A243F] font-bold text-lg">Havilla.</p>
+            </div>
+            <button id="menuBtn" onclick="toggleMenu()" class="md:hidden text-[#0A243F] text-2xl">☰</button>
+       </nav>
+
+        <div id="mobileMenu" class="hidden md:hidden flex-col gap-4 px-6 pb-4 text-sm bg-white">
+            <a class="text-[#0A243F] font-medium" href="#">Home</a>
+            <a class="text-[#0A243F] opacity-50" href="#">How it works</a>
+            <a class="text-[#0A243F] opacity-50" href="#">Features</a>
+            <a class="text-[#0A243F]" href="#">Sign in</a>
+        </div>
+
+
+        <!-- Back -->
+        <a href="login.html" class="flex items-center gap-2 text-sm text-[#0A243F] font-medium mb-6">
+            ← Back
+        </a>
+
+        <!-- Illustration -->
+        <div class="flex justify-center mb-6">
+            <img src="../Images/verification-img.png" alt="Verification" class="w-52">
+        </div>
+
+        <!-- Heading -->
+        <h2 class="text-xl font-bold text-[#0A243F] text-center mb-2">Enter your verification Code</h2>
+        <p class="text-sm text-gray-500 text-center mb-6">
+            A verification code has been sent to your registered email. Kindly enter the verification code sent to <span class="text-gray-700">gr****21@gmail.com</span>
+        </p>
+
+        <!-- OTP inputs -->
+        <div class="flex justify-center gap-3 mb-3">
+            <input type="text" maxlength="1" class="w-11 h-11 text-center text-lg font-semibold border border-gray-300 rounded-lg outline-none focus:border-[#F4A160]">
+            <input type="text" maxlength="1" class="w-11 h-11 text-center text-lg font-semibold border border-gray-300 rounded-lg outline-none focus:border-[#F4A160]">
+            <input type="text" maxlength="1" class="w-11 h-11 text-center text-lg font-semibold border border-gray-300 rounded-lg outline-none focus:border-[#F4A160]">
+            <input type="text" maxlength="1" class="w-11 h-11 text-center text-lg font-semibold border border-gray-300 rounded-lg outline-none focus:border-[#F4A160]">
+            <input type="text" maxlength="1" class="w-11 h-11 text-center text-lg font-semibold border border-gray-300 rounded-lg outline-none focus:border-[#F4A160]">
+            <input type="text" maxlength="1" class="w-11 h-11 text-center text-lg font-semibold border border-gray-300 rounded-lg outline-none focus:border-[#F4A160]">
+        </div>
+
+        <!-- Resend -->
+        <p class="text-xs text-center text-gray-500 mb-6">
+            Didn't get a code? <a href="#" class="text-[#F4A160]">Click to resend</a> (<span id="countdown">1:00</span>)
+        </p>
+
+        <!-- Verify button -->
+        <button class="w-full bg-[#a8c4e0] text-white py-3 rounded-lg text-sm font-medium hover:bg-[#F4A160] transition-colors duration-200" onclick="openModal('successModal')">
+            Verify
+        </button>
+
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+
+        // Auto jump to next input
+        const inputs = document.querySelectorAll('input[type="text"]');
+        inputs.forEach((input, i) => {
+            input.addEventListener('input', () => {
+                if (input.value.length === 1 && i < inputs.length - 1) {
+                    inputs[i + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && input.value === '' && i > 0) {
+                    inputs[i - 1].focus();
+                }
+            });
+        });
+
+        // Countdown timer
+        let seconds = 60;
+        const countdown = document.getElementById('countdown');
+        const timer = setInterval(() => {
+            seconds--;
+            const m = Math.floor(seconds / 60);
+            const s = seconds % 60;
+            countdown.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+            if (seconds <= 0) clearInterval(timer);
+        }, 1000);
+
+       function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+    </script>
+
+</body>
+</html>
