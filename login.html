@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Havilla Signup Page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+
+  <div class="auth-container">
+
+    <div class="auth-image"></div>
+
+    <div class="auth-content">
+
+      <div class="auth-box">
+
+        <div class="logo">
+            <img src="https://res.cloudinary.com/dzvcbnbmf/image/upload/v1779952601/Logo_2_rll90v.png" alt="">
+        </div>
+
+        <h1>Create an Account</h1>
+
+        <p class="subtitle">
+          Join Havilla as an event planner and simplify venue discovery,
+          booking coordination and event management.
+        </p>
+
+        <div class="toggle-group">
+          <button class="toggle-btn active">Planner</button>
+          <button class="toggle-btn">Venue Owner</button>
+        </div>
+
+        <form action="signupForm">
+
+        <div class="input-group">
+          <label>Full Name</label>
+
+          <div class="input-box">
+            <input type="text" placeholder="Enter full name" id="fullName">
+            
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Email Address</label>
+
+          <div class="input-box">
+            <input type="email" placeholder="Enter email address" id="email">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+
+          <div class="input-box">
+            <input type="password" placeholder="Enter password" id="password">
+            <i>
+              <img src="https://res.cloudinary.com/dzvcbnbmf/image/upload/v1780056468/outline_ca6198.png" alt="◉" id="viewPassword">
+            </i>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Confirm Password</label>
+
+          <div class="input-box">
+            <input type="password" placeholder="Confirm password" id="confirmPassword">
+           <i>
+              <img src="https://res.cloudinary.com/dzvcbnbmf/image/upload/v1780056468/outline_ca6198.png" alt="◉" id="viewPassword">
+            </i>
+          </div>
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" id="terms">
+
+          <p>
+            I accept Havilla's
+            <a href="#">Terms of Service</a>
+            and
+            <a href="#">Privacy Policy</a>
+          </p>
+        </div>
+
+        <button class="main-btn">
+          Continue
+        </button>
+
+        </form>
+
+        <div class="divider">
+          or
+        </div>
+
+        <div class="socials">
+
+          <div class="social-btn">
+            <img src="https://res.cloudinary.com/dzvcbnbmf/image/upload/v1780014809/aquarius_lkrwuu.png" alt="G">
+          </div>
+
+          <div class="social-btn">
+            <img src="https://res.cloudinary.com/dzvcbnbmf/image/upload/v1780014908/gemini_evjxqo.png" alt="F">
+          </div>
+
+          <div class="social-btn">
+            <img src="https://res.cloudinary.com/dzvcbnbmf/image/upload/v1780014921/gemini-2_q9les4.png" alt="a">
+          </div>
+
+        </div>
+
+        <div class="bottom-text">
+          Already have an account?
+          <a href="#">Log In</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
