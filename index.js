@@ -34,8 +34,6 @@ continueBtn.disabled = true;
   }
 
 
-  // INPUTS
-
   fullName.addEventListener("input", validateForm);
   email.addEventListener("input", validateForm);
   password.addEventListener("input", validateForm);
@@ -49,7 +47,7 @@ continueBtn.disabled = true;
 
     e.preventDefault();
 
-    // CHECK PASSWORD MATCH
+    //  PASSWORD MATCH
 
     if (password.value !== confirmPassword.value) {
 
@@ -66,21 +64,17 @@ continueBtn.disabled = true;
         }
     });
 
-    // SUCCESS
+    
 
     alert("Account Created Successfully!");
 
     
-    // RESET FORM
+  
 
     form.reset();
 
     continueBtn.disabled = true;
     continueBtn.style.opacity = "0.5";
 
-
-    // OR REDIRECT TO ANOTHER PAGE
-
-    // window.location.href = "login.html";
 
   });
