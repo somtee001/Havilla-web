@@ -3,45 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | Havilla</title>
+    <title>Planner Sign Up | Havilla</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="signup.js" defer></script>
+
     <style>
-        body { font-family: 'Poppins', sans-serif; }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
     <div class="flex w-full max-w-4xl min-h-[600px] bg-white rounded-2xl overflow-hidden shadow-lg">
 
         <!-- LEFT: venue image -->
-        <div class="hidden md:block w-2/5 relative">
+        <div class="hidden md:block w-2/5">
             <img src="../Images/Rectangle 112.png" alt="Venue" class="w-full h-full object-cover">
         </div>
 
         <!-- RIGHT: form -->
-        <div class="w-full md:w-3/5 px-10 py-10 flex flex-col justify-center">
+        <div class="w-full md:w-3/5 px-4 md:px-10 py-10 flex flex-col justify-center">
 
-            <!-- Mobile nav -->
-            <nav class="md:hidden flex items-center justify-between py-2 mb-6">
-                <div class="flex justify-center items-center gap-2">
-                    <img src="../Images/Logo.png" alt="Logo">
-                    <p class="text-[#0A243F] font-bold text-lg">Havilla.</p>
-                </div>
-                <button onclick="toggleMenu()" class="text-[#0A243F] text-2xl">☰</button>
-            </nav>
-
-            <div id="mobileMenu" class="hidden flex-col gap-4 pb-4 text-sm bg-white mb-2">
-                <a class="text-[#0A243F] font-medium" href="#">Home</a>
-                <a class="text-[#0A243F] opacity-50" href="#">How it works</a>
-                <a class="text-[#0A243F] opacity-50" href="#">Features</a>
-                <a class="text-[#0A243F]" href="login.html">Sign in</a>
+        <nav class="md:hidden flex items-center justify-between py-2 mb-6 ">
+            <div class="flex justify-center items-center gap-2">
+            <img src="/Images/Logo.png" alt="Logo">
+            <p class="text-[#0A243F] font-bold text-lg">Havilla.</p>
             </div>
+            <button id="menuBtn" onclick="toggleMenu()" class="md:hidden text-[#0A243F] text-2xl">☰</button>
+        </nav>
 
-            <!-- Desktop logo -->
-            <div class="hidden md:flex items-center gap-2 mb-6">
-                <img src="../Images/Logo.png" alt="Logo" class="w-8 h-8">
+        <div id="mobileMenu" class="hidden md:hidden flex-col gap-4 px-6 pb-4 text-sm bg-white">
+            <a class="text-[#0A243F] font-medium" href="#">Home</a>
+            <a class="text-[#0A243F] opacity-50" href="#">How it works</a>
+            <a class="text-[#0A243F] opacity-50" href="#">Features</a>
+            <a class="text-[#0A243F]" href="#">Sign in</a>
+        </div>
+
+
+            <!-- Logo -->
+            <div class="hidden md:flex items-center gap-2 mb-4">
+                <img src="/Images/Logo.png" alt="Logo" class="w-8 h-8">
             </div>
 
             <h2 class="text-2xl font-bold text-[#0A243F] mb-1">Create an Account</h2>
@@ -59,6 +64,7 @@
 
             <!-- Planner Form -->
             <div id="plannerForm" class="hidden">
+                <!-- Full Name -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-[#0A243F] mb-1">Full Name</label>
                     <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
@@ -67,6 +73,7 @@
                     </div>
                 </div>
 
+                <!-- Email -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-[#0A243F] mb-1">Email Address</label>
                     <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
@@ -75,6 +82,7 @@
                     </div>
                 </div>
 
+                <!-- Password -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-[#0A243F] mb-1">Password</label>
                     <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
@@ -83,6 +91,7 @@
                     </div>
                 </div>
 
+                <!-- Confirm Password -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-[#0A243F] mb-1">Confirm Password</label>
                     <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
@@ -91,23 +100,27 @@
                     </div>
                 </div>
 
+                <!-- Terms -->
                 <div class="flex items-center gap-2 mb-5">
-                    <input type="checkbox" id="plannerTerms" class="w-4 h-4 accent-[#F4A160]">
-                    <label for="plannerTerms" class="text-xs text-gray-500">
-                        I accept Havilla's <a href="#" class="text-[#F4A160] underline">Terms of Service</a> and <a href="#" class="text-[#F4A160] underline">Privacy Policy</a>
+                    <input type="checkbox" id="terms" class="w-4 h-4 accent-[#F4A160]">
+                    <label for="terms" class="text-xs text-gray-500">
+                        I accept Havilla's <a href="#" class="text-[#114FF5] underline">Terms of Service</a> and <a href="#" class="text-[#114FF5] underline">Privacy Policy</a>
                     </label>
                 </div>
 
+                <!-- Continue button -->
                 <button class="w-full bg-[#a8c4e0] text-white py-3 rounded-lg text-sm font-medium mb-4 hover:bg-[#F4A160] transition-colors duration-200">
                     Continue
                 </button>
 
+                <!-- Divider -->
                 <div class="flex items-center gap-3 mb-4">
                     <div class="flex-1 h-px bg-gray-200"></div>
                     <span class="text-xl text-gray-400">or</span>
                     <div class="flex-1 h-px bg-gray-200"></div>
                 </div>
 
+                <!-- Social login -->
                 <div class="flex justify-center gap-4 mb-5">
                     <button class="border border-gray-200 flex justify-center items-center md:w-64 w-28 h-10 hover:bg-gray-50">
                         <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
@@ -120,13 +133,15 @@
                     </button>
                 </div>
 
+                <!-- Login link -->
                 <p class="text-xs text-center text-gray-500">
-                    Already have an account? <a href="login.html" class="text-[#0A243F] font-medium">Log In</a>
+                    Already have an account? <a href="login.html" class="text-[#0A243F] font-medium underline">Log In</a>
                 </p>
             </div>
 
             <!-- Owner Form -->
             <div id="ownerForm" class="hidden">
+                <!-- Full Name -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-[#0A243F] mb-1">Full Name</label>
                     <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
@@ -135,6 +150,7 @@
                     </div>
                 </div>
 
+                <!-- Email -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-[#0A243F] mb-1">Email Address</label>
                     <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
@@ -143,6 +159,7 @@
                     </div>
                 </div>
 
+                <!-- Password -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-[#0A243F] mb-1">Password</label>
                     <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
@@ -151,6 +168,7 @@
                     </div>
                 </div>
 
+                <!-- Confirm Password -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-[#0A243F] mb-1">Confirm Password</label>
                     <div class="flex items-center border border-gray-200 rounded-lg px-3 py-2">
@@ -159,23 +177,27 @@
                     </div>
                 </div>
 
+                <!-- Terms -->
                 <div class="flex items-center gap-2 mb-5">
                     <input type="checkbox" id="ownerTerms" class="w-4 h-4 accent-[#F4A160]">
                     <label for="ownerTerms" class="text-xs text-gray-500">
-                        I accept Havilla's <a href="#" class="text-[#F4A160] underline">Terms of Service</a> and <a href="#" class="text-[#F4A160] underline">Privacy Policy</a>
+                        I accept Havilla's <a href="#" class="text-[#114FF5] underline">Terms of Service</a> and <a href="#" class="text-[#114FF5] underline">Privacy Policy</a>
                     </label>
                 </div>
 
+                <!-- Continue button -->
                 <button class="w-full bg-[#a8c4e0] text-white py-3 rounded-lg text-sm font-medium mb-4 hover:bg-[#F4A160] transition-colors duration-200">
                     Continue
                 </button>
 
+                <!-- Divider -->
                 <div class="flex items-center gap-3 mb-4">
                     <div class="flex-1 h-px bg-gray-200"></div>
                     <span class="text-xl text-gray-400">or</span>
                     <div class="flex-1 h-px bg-gray-200"></div>
                 </div>
 
+                <!-- Social login -->
                 <div class="flex justify-center gap-4 mb-5">
                     <button class="border border-gray-200 flex justify-center items-center md:w-64 w-28 h-10 hover:bg-gray-50">
                         <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
@@ -188,55 +210,12 @@
                     </button>
                 </div>
 
+                <!-- Login link -->
                 <p class="text-xs text-center text-gray-500">
-                    Already have an account? <a href="login.html" class="text-[#0A243F] font-medium">Log In</a>
+                    Already have an account? <a href="login.html" class="text-[#0A243F] font-medium underline">Log In</a>
                 </p>
             </div>
-
         </div>
     </div>
-
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
-        }
-
-        function switchRole(role) {
-            const plannerBtn = document.getElementById('plannerBtn');
-            const ownerBtn = document.getElementById('ownerBtn');
-            const plannerForm = document.getElementById('plannerForm');
-            const ownerForm = document.getElementById('ownerForm');
-
-            plannerForm.classList.add('hidden');
-            ownerForm.classList.add('hidden');
-
-            if (role === 'planner') {
-                plannerBtn.classList.add('bg-[#0A243F]', 'text-white');
-                plannerBtn.classList.remove('bg-white', 'text-gray-500');
-                ownerBtn.classList.add('bg-white', 'text-gray-500');
-                ownerBtn.classList.remove('bg-[#0A243F]', 'text-white');
-                plannerForm.classList.remove('hidden');
-                document.getElementById('subtext').textContent = 'Join Havilla as an event planner and simplify venue discovery, booking coordination, and event management from one modern dashboard.';
-            } else {
-                ownerBtn.classList.add('bg-[#0A243F]', 'text-white');
-                ownerBtn.classList.remove('bg-white', 'text-gray-500');
-                plannerBtn.classList.add('bg-white', 'text-gray-500');
-                plannerBtn.classList.remove('bg-[#0A243F]', 'text-white');
-                ownerForm.classList.remove('hidden');
-                document.getElementById('subtext').textContent = 'Join Havilla as a venue owner and simplify venue listing, booking management, availability management, and client communication all from one modern dashboard.';
-            }
-        }
-
-        // default to planner on page load
-        switchRole('planner');
-    </script>
 </body>
 </html>
