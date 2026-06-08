@@ -56,7 +56,7 @@
                     Planner
                 </button>
                 <button id="ownerBtn" onclick="switchRole('owner')" class="w-1/2 py-2 text-sm font-medium bg-white text-gray-500 transition-colors duration-200">
-                    Venue Owner
+                Venue Owner
                 </button>
             </div>
 
@@ -136,31 +136,5 @@
 
         </div>
     </div>
-
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
-        }
-
-        function switchRole(role) {
-            const plannerBtn = document.getElementById('plannerBtn');
-            const ownerBtn = document.getElementById('ownerBtn');
-
-            if (role === 'planner') {
-                plannerBtn.classList.add('bg-[#0A243F]', 'text-white');
-                plannerBtn.classList.remove('bg-white', 'text-gray-500');
-                ownerBtn.classList.add('bg-white', 'text-gray-500');
-                ownerBtn.classList.remove('bg-[#0A243F]', 'text-white');
-            } else {
-                ownerBtn.classList.add('bg-[#0A243F]', 'text-white');
-                ownerBtn.classList.remove('bg-white', 'text-gray-500');
-                plannerBtn.classList.add('bg-white', 'text-gray-500');
-                plannerBtn.classList.remove('bg-[#0A243F]', 'text-white');
-            }
-        }
-    </script>
-
 </body>
 </html>
