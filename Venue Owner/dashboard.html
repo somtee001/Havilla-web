@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Havilla — Owner Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              havillaNavy: "#0a2240",
+              havillaActiveBlue: "#133054",
+              havillaBg: "#f8fafc",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      /* Custom scrollbar handling for elegant dropdown selectors */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f5f9;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body class="bg-havillaBg text-gray-800 antialiased min-h-screen">
+    <div class="flex flex-col md:flex-row min-h-screen relative">
+      <!-- Mobile Sticky Navigation Topbar -->
+      <header
+        class="md:hidden bg-havillaNavy text-white px-5 py-3.5 flex items-center justify-between sticky top-0 z-50 shadow-sm"
+      >
+        <div class="flex items-center gap-3">
+          <img
+            src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1780010791/Logo_2_rkeynw.png"
+            alt="Havilla Logo"
+            class="w-8 h-8 object-contain"
+          />
+          <div>
+            <h3 class="font-bold text-sm tracking-wide leading-tight">
+              Havilla
+            </h3>
+            <p class="text-[10px] text-slate-400 font-light tracking-wider">
+              Owner Dashboard
+            </p>
+          </div>
+        </div>
+        <button
+          onclick="toggleSidebarMenu()"
+          class="text-xl p-2 text-gray-200 hover:text-white transition-colors focus:outline-none"
+          aria-label="Toggle navigation menu"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </header>
+
+      <!-- Sidebar Container Interface -->
+      <aside
+        id="sidebarContainer"
+        class="hidden md:flex w-full md:w-60 bg-havillaNavy text-white flex-col justify-between fixed md:sticky top-[60px] md:top-0 h-[calc(100vh-60px)] md:h-screen z-40 border-r border-slate-800/60 transition-all duration-200 ease-in-out"
+      >
+        <div
+          class="flex flex-col pt-6 px-4 overflow-y-auto custom-scrollbar flex-1"
+        >
+          <!-- Desktop Exclusive Branding Identity Header -->
+          <div class="hidden md:flex items-center gap-3 mb-7 pl-2">
+            <img
+              src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1780010791/Logo_2_rkeynw.png"
+              alt="Havilla Logo"
+              class="w-9 h-9 object-contain"
+            />
+            <div>
+              <h3
+                class="font-semibold text-base tracking-wide leading-none mb-1"
+              >
+                Havilla
+              </h3>
+              <p class="text-[11px] text-slate-400 font-light tracking-wide">
+                Owner Dashboard
+              </p>
+            </div>
+          </div>
+
+          <!-- Semantic Navigation links block -->
+          <nav class="flex flex-col gap-1">
+            <a
+              href="dashboard.html"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium bg-havillaActiveBlue border border-slate-700/30 text-white transition-all duration-150"
+            >
+              <i
+                class="fa-solid fa-house text-center w-4 text-[13px] text-blue-400"
+              ></i>
+              <span>Overview</span>
+            </a>
+            <a
+              href="venues.html"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-havillaActiveBlue/40 transition-all duration-150"
+            >
+              <i class="fa-solid fa-building text-center w-4 text-[13px]"></i>
+              <span>Venues</span>
+            </a>
+            <a
+              href="bookings.html"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-havillaActiveBlue/40 transition-all duration-150"
+            >
+              <i
+                class="fa-solid fa-calendar-check text-center w-4 text-[13px]"
+              ></i>
+              <span>Bookings</span>
+            </a>
+            <a
+              href="calendar.html"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-havillaActiveBlue/40 transition-all duration-150"
+            >
+              <i class="fa-solid fa-calendar text-center w-4 text-[13px]"></i>
+              <span>Calendar</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-havillaActiveBlue/40 transition-all duration-150"
+            >
+              <i class="fa-solid fa-quote-left text-center w-4 text-[13px]"></i>
+              <span>Quotes</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-havillaActiveBlue/40 transition-all duration-150"
+            >
+              <i class="fa-regular fa-star text-center w-4 text-[13px]"></i>
+              <span>Reviews</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-havillaActiveBlue/40 transition-all duration-150"
+            >
+              <i class="fa-solid fa-chart-line text-center w-4 text-[13px]"></i>
+              <span>Analytics</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-havillaActiveBlue/40 transition-all duration-150"
+            >
+              <i class="fa-regular fa-message text-center w-4 text-[13px]"></i>
+              <span>Messages</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-havillaActiveBlue/40 transition-all duration-150"
+            >
+              <i class="fa-solid fa-money-bill text-center w-4 text-[13px]"></i>
+              <span>Payments</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:text-white hover:bg-havillaActiveBlue/40 transition-all duration-150 mt-4 border-t border-slate-800/80 pt-4"
+            >
+              <i class="fa-solid fa-gear text-center w-4 text-[13px]"></i>
+              <span>Settings</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Authenticated Profile Entity Section Footer -->
+        <div
+          class="flex items-center gap-3 border-t border-slate-800/80 p-4 shrink-0 bg-havillaNavy"
+        >
+          <img
+            src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1775954628/image-jonathan_iv05sh.jpg"
+            alt="Profile Avatar"
+            class="w-9 h-9 rounded-full object-cover border border-slate-700/50"
+          />
+          <div class="overflow-hidden">
+            <h4
+              class="text-[11px] font-medium text-slate-100 truncate tracking-wide"
+            >
+              Ademola Adeyemi
+            </h4>
+            <p class="text-[9px] text-slate-400 truncate tracking-tight">
+              The Grand Pavilion
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Operational Analytics Core Workspace Layer -->
+      <main
+        class="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto w-full overflow-x-hidden"
+      >
+        <!-- Workspace Greetings Greeting Bar Context -->
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6"
+        >
+          <div>
+            <h2
+              class="text-xl font-bold text-gray-900 tracking-tight sm:text-2xl"
+            >
+              Good morning, Ademola
+            </h2>
+            <p class="text-xs text-gray-500 mt-1">
+              Here's what's happening with your venues today.
+            </p>
+          </div>
+          <div class="flex items-center gap-2.5 self-start sm:self-center">
+            <button
+              class="w-9 h-9 border border-gray-200 bg-white hover:bg-gray-50 text-gray-500 rounded-lg flex items-center justify-center transition-colors shadow-xs"
+              aria-label="View notifications"
+            >
+              <i class="fa-regular fa-bell text-sm"></i>
+            </button>
+            <a
+              href="venues.html"
+              class="h-9 bg-[#1d446c] hover:bg-havillaNavy text-white px-4 rounded-lg text-xs font-medium flex items-center gap-2 shadow-xs transition-colors"
+            >
+              <i class="fa-solid fa-plus text-[10px]"></i>
+              Add New Venue
+            </a>
+          </div>
+        </div>
+
+        <!-- Grid Matrix KPI Metric Panel Blocks -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white p-4 border border-gray-100 rounded-xl shadow-xs">
+            <h4
+              class="text-xs font-medium text-gray-500 tracking-wide uppercase"
+            >
+              Total Bookings
+            </h4>
+            <h2 class="text-2xl font-bold text-gray-900 mt-1.5">135</h2>
+            <p
+              class="text-[11px] text-emerald-600 font-medium mt-2 flex items-center gap-1"
+            >
+              <i class="fa-solid fa-arrow-trend-up text-[10px]"></i> 13%
+              <span class="text-gray-400 font-normal">from last month</span>
+            </p>
+          </div>
+          <div class="bg-white p-4 border border-gray-100 rounded-xl shadow-xs">
+            <h4
+              class="text-xs font-medium text-gray-500 tracking-wide uppercase"
+            >
+              Upcoming Bookings
+            </h4>
+            <h2 class="text-2xl font-bold text-gray-900 mt-1.5">20</h2>
+            <p class="text-[11px] mt-2">
+              <a
+                href="#"
+                class="text-blue-600 underline decoration-blue-600/30 hover:decoration-blue-600 font-medium"
+                >View calendar</a
+              >
+            </p>
+          </div>
+          <div class="bg-white p-4 border border-gray-100 rounded-xl shadow-xs">
+            <h4
+              class="text-xs font-medium text-gray-500 tracking-wide uppercase"
+            >
+              This Month Revenue
+            </h4>
+            <h2 class="text-2xl font-bold text-gray-900 mt-1.5">₦5,780,000</h2>
+            <p
+              class="text-[11px] text-emerald-600 font-medium mt-2 flex items-center gap-1"
+            >
+              <i class="fa-solid fa-arrow-trend-up text-[10px]"></i> 10%
+              <span class="text-gray-400 font-normal">from last month</span>
+            </p>
+          </div>
+          <div class="bg-white p-4 border border-gray-100 rounded-xl shadow-xs">
+            <h4
+              class="text-xs font-medium text-gray-500 tracking-wide uppercase"
+            >
+              Average Rating
+            </h4>
+            <h2 class="text-2xl font-bold text-gray-900 mt-1.5">4.5</h2>
+            <p class="text-[11px] text-gray-500 font-medium mt-2">
+              From <span class="text-gray-700 font-semibold">219 reviews</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Split Chart / Context Feed Structural Row Block -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
+          <!-- Analytical Chart Section Module Container -->
+          <div
+            class="lg:col-span-2 bg-white p-5 border border-gray-100 rounded-xl shadow-xs relative"
+          >
+            <div class="flex items-center justify-between mb-4 relative z-20">
+              <h3 class="text-sm font-semibold text-gray-900 tracking-tight">
+                Bookings Overview
+              </h3>
+
+              <div class="relative inline-block text-left">
+                <button
+                  onclick="toggleMonthDropdown()"
+                  id="monthDropdownBtn"
+                  class="px-3 py-1.5 bg-white border border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-700 rounded-lg text-xs font-medium transition-all shadow-xs flex items-center gap-1.5"
+                >
+                  <span id="selectedMonthName">This Month</span>
+                  <i
+                    class="fa-solid fa-chevron-down text-[9px] text-gray-400"
+                  ></i>
+                </button>
+                <div
+                  id="monthDropdownMenu"
+                  class="hidden absolute right-0 mt-1.5 w-40 max-h-56 overflow-y-auto bg-white border border-gray-200 rounded-xl shadow-lg z-30 divide-y divide-gray-50 custom-scrollbar"
+                >
+                  <button
+                    onclick="updateChartMonth('January')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    January
+                  </button>
+                  <button
+                    onclick="updateChartMonth('February')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    February
+                  </button>
+                  <button
+                    onclick="updateChartMonth('March')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    March
+                  </button>
+                  <button
+                    onclick="updateChartMonth('April')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    April
+                  </button>
+                  <button
+                    onclick="updateChartMonth('May')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    May
+                  </button>
+                  <button
+                    onclick="updateChartMonth('June')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    June
+                  </button>
+                  <button
+                    onclick="updateChartMonth('July')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    July
+                  </button>
+                  <button
+                    onclick="updateChartMonth('August')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    August
+                  </button>
+                  <button
+                    onclick="updateChartMonth('September')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    September
+                  </button>
+                  <button
+                    onclick="updateChartMonth('October')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    October
+                  </button>
+                  <button
+                    onclick="updateChartMonth('November')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    November
+                  </button>
+                  <button
+                    onclick="updateChartMonth('December')"
+                    class="w-full text-left px-4 py-2 text-xs text-gray-600 hover:bg-slate-50 transition-colors"
+                  >
+                    December
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Standard Height Fixed Canvas Wrapper -->
+            <div class="w-full relative h-56 z-10">
+              <canvas id="bookingChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Feed / Feed Real-Time Subscriptions Card -->
+          <div
+            class="bg-white p-5 border border-gray-100 rounded-xl shadow-xs flex flex-col justify-between"
+          >
+            <div class="h-full flex flex-col justify-between">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-semibold text-gray-900 tracking-tight">
+                  Recent Bookings
+                </h3>
+                <a
+                  href="bookings.html"
+                  class="text-xs font-medium text-slate-400 hover:text-havillaNavy transition-colors"
+                  >View all</a
+                >
+              </div>
+
+              <div class="space-y-4 flex-1 flex flex-col justify-center">
+                <div
+                  class="flex items-center justify-between py-1 border-b border-gray-50 pb-3"
+                >
+                  <div class="flex items-center gap-3">
+                    <img
+                      src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1775953530/image-daniel_vpyhr8.jpg"
+                      alt="Philip Ado Avatar"
+                      class="w-9 h-9 rounded-full object-cover border border-gray-100"
+                    />
+                    <div>
+                      <h4 class="text-xs font-semibold text-gray-800">
+                        Philip Ado
+                      </h4>
+                      <p class="text-[10px] text-gray-400 mt-0.5 font-light">
+                        24th May 2026
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md"
+                  >
+                    Completed
+                  </span>
+                </div>
+                <div class="flex items-center justify-between py-1 pt-1">
+                  <div class="flex items-center gap-3">
+                    <img
+                      src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1775954628/image-jonathan_iv05sh.jpg"
+                      alt="Adesola Usman Avatar"
+                      class="w-9 h-9 rounded-full object-cover border border-gray-100"
+                    />
+                    <div>
+                      <h4 class="text-xs font-semibold text-gray-800">
+                        Adesola Usman
+                      </h4>
+                      <p class="text-[10px] text-gray-400 mt-0.5 font-light">
+                        4th June 2026
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="text-[10px] font-semibold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md"
+                  >
+                    Pending
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Venue Listing Aggregator Cards Block -->
+        <div class="bg-white p-5 border border-gray-100 rounded-xl shadow-xs">
+          <div class="flex items-center justify-between mb-5">
+            <h3 class="text-sm font-semibold text-gray-900 tracking-tight">
+              Your Venues
+            </h3>
+            <a
+              href="venues.html"
+              class="text-xs font-semibold text-slate-500 hover:text-havillaNavy transition-colors"
+            >
+              Manage Venues
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Item Card Entity Base -->
+            <a
+              href="venues.html"
+              class="border border-gray-100 rounded-xl overflow-hidden group block hover:shadow-md hover:border-gray-200/80 transition-all duration-200 bg-white"
+            >
+              <div class="h-36 bg-gray-100 overflow-hidden relative">
+                <img
+                  src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1779906503/HAVILLA_y2pnlw.jpg"
+                  alt="Luxury Hall Venue"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div class="p-3.5 flex items-center justify-between">
+                <div>
+                  <h4
+                    class="text-xs font-semibold text-gray-900 group-hover:text-blue-900 transition-colors"
+                  >
+                    Luxury Hall
+                  </h4>
+                  <p class="text-[11px] text-gray-500 font-medium mt-1">
+                    ₦1,500,000
+                  </p>
+                </div>
+                <span
+                  class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100"
+                  >Active</span
+                >
+              </div>
+            </a>
+
+            <!-- Item Card Entity Base -->
+            <a
+              href="venues.html"
+              class="border border-gray-100 rounded-xl overflow-hidden group block hover:shadow-md hover:border-gray-200/80 transition-all duration-200 bg-white"
+            >
+              <div class="h-36 bg-gray-100 overflow-hidden relative">
+                <img
+                  src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1780010802/PHOTO-2026-05-28-23-56-57_gxmf2g.jpg"
+                  alt="The Grand Hall Venue"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div class="p-3.5 flex items-center justify-between">
+                <div>
+                  <h4
+                    class="text-xs font-semibold text-gray-900 group-hover:text-blue-900 transition-colors"
+                  >
+                    The Grand Hall
+                  </h4>
+                  <p class="text-[11px] text-gray-500 font-medium mt-1">
+                    ₦890,000
+                  </p>
+                </div>
+                <span
+                  class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100"
+                  >Active</span
+                >
+              </div>
+            </a>
+
+            <!-- Item Card Entity Base -->
+            <a
+              href="venues.html"
+              class="border border-gray-100 rounded-xl overflow-hidden group block hover:shadow-md hover:border-gray-200/80 transition-all duration-200 bg-white"
+            >
+              <div class="h-36 bg-gray-100 overflow-hidden relative">
+                <img
+                  src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1779906503/HAVILLA_y2pnlw.jpg"
+                  alt="Conference Hall Venue"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div class="p-3.5 flex items-center justify-between">
+                <div>
+                  <h4
+                    class="text-xs font-semibold text-gray-900 group-hover:text-blue-900 transition-colors"
+                  >
+                    Conference Hall
+                  </h4>
+                  <p class="text-[11px] text-gray-500 font-medium mt-1">
+                    ₦800,000
+                  </p>
+                </div>
+                <span
+                  class="text-[9px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100"
+                  >Active</span
+                >
+              </div>
+            </a>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- JavaScript Interactions Logic Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      function toggleSidebarMenu() {
+        const sidebar = document.getElementById("sidebarContainer");
+        sidebar.classList.toggle("hidden");
+        sidebar.classList.toggle("flex");
+      }
+
+      // Dropdown Switch Logic
+      function toggleMonthDropdown() {
+        const menu = document.getElementById("monthDropdownMenu");
+        menu.classList.toggle("hidden");
+      }
+
+      // Window Event Click Catcher handles closing active overlay panels safely
+      window.addEventListener("click", function (e) {
+        const dropdownBtn = document.getElementById("monthDropdownBtn");
+        const dropdownMenu = document.getElementById("monthDropdownMenu");
+        if (
+          dropdownBtn &&
+          !dropdownBtn.contains(e.target) &&
+          !dropdownMenu.contains(e.target)
+        ) {
+          dropdownMenu.classList.add("hidden");
+        }
+      });
+
+      // Initialize Line Chart Instance with explicit Canvas context properties
+      const ctx = document.getElementById("bookingChart").getContext("2d");
+
+      // Creating elegant custom color visual gradient paths for Chart lines
+      const activeBlueGradient = ctx.createLinearGradient(0, 0, 0, 200);
+      activeBlueGradient.addColorStop(0, "rgba(19, 48, 84, 0.12)");
+      activeBlueGradient.addColorStop(1, "rgba(19, 48, 84, 0)");
+
+      const bookingChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          datasets: [
+            {
+              label: "Bookings Volume",
+              data: [240, 315, 270, 180, 260, 255, 195],
+              borderColor: "#133054",
+              backgroundColor: activeBlueGradient,
+              borderWidth: 2,
+              tension: 0.38,
+              fill: true,
+              pointBackgroundColor: "#133054",
+              pointBorderColor: "#fff",
+              pointBorderWidth: 1.5,
+              pointRadius: 3.5,
+              pointHoverRadius: 6,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              min: 0,
+              max: 400,
+              ticks: {
+                stepSize: 100,
+                font: { family: "Poppins", size: 9 },
+                color: "#94a3b8",
+              },
+              grid: { color: "#f1f5f9" },
+            },
+            x: {
+              grid: { display: false },
+              ticks: { font: { family: "Poppins", size: 9 }, color: "#94a3b8" },
+            },
+          },
+        },
+      });
+
+      // Mutation callback processing random values cleanly into targeted dashboard matrices
+      function updateChartMonth(monthName) {
+        document.getElementById("selectedMonthName").innerText = monthName;
+        document.getElementById("monthDropdownMenu").classList.add("hidden");
+
+        const randomData = Array.from(
+          { length: 7 },
+          () => Math.floor(Math.random() * (380 - 100 + 1)) + 100,
+        );
+        bookingChart.data.datasets[0].data = randomData;
+        bookingChart.update();
+      }
+    </script>
+  </body>
+</html>
