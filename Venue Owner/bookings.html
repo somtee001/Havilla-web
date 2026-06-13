@@ -1,0 +1,995 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Management | Havilla</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              havillaNavy: "#072447",
+              havillaActiveBlue: "#133054",
+              havillaHoverBlue: "#10335f",
+              havillaAccent: "#1d446c",
+              havillaBg: "#f8fafc",
+            },
+            fontFamily: {
+              sans: ["Poppins", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body
+    onload="
+      generateBookingData();
+      updateMetricSummaryCards();
+      renderBookingTable();
+    "
+    class="..."
+  >
+    <!-- Mobile Top Header Bar -->
+    <div
+      class="md:hidden bg-havillaNavy text-white flex items-center justify-between p-4 sticky top-0 z-30 shadow-md"
+    >
+      <div class="flex items-center gap-3">
+        <img
+          src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1780010791/Logo_2_rkeynw.png"
+          alt="Havilla Logo"
+          class="w-8 h-8 object-contain"
+        />
+        <h3 class="text-lg font-semibold tracking-wide">Havilla</h3>
+      </div>
+      <button
+        onclick="toggleMobileMenu()"
+        class="text-white p-2 text-xl focus:outline-none"
+      >
+        <i id="menuIcon" class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <div class="flex flex-col md:flex-row min-h-screen w-full relative">
+      <!-- Sidebar Drawer Panel Layout -->
+      <aside
+        id="sidebar"
+        class="hidden md:flex fixed md:sticky top-[64px] md:top-0 left-0 w-full md:w-64 bg-havillaNavy text-white flex-col justify-between p-6 h-[calc(100vh-64px)] md:h-screen shrink-0 z-20 shadow-xl md:shadow-none transition-all duration-300 overflow-y-auto"
+      >
+        <div class="flex flex-col">
+          <div class="hidden md:flex items-center gap-3 mb-8">
+            <img
+              src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1780010791/Logo_2_rkeynw.png"
+              alt="Havilla Logo"
+              class="w-10 h-10 object-contain"
+            />
+            <div>
+              <h3 class="text-xl font-semibold leading-tight tracking-wide">
+                Havilla
+              </h3>
+              <p class="text-[11px] text-slate-400">Owner Dashboard</p>
+            </div>
+          </div>
+
+          <nav class="flex flex-col gap-1.5">
+            <a
+              href="dashboard.html"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-havillaHoverBlue transition-all duration-200"
+            >
+              <i class="fa-solid fa-house w-5 text-center text-base"></i>
+              <span>Overview</span>
+            </a>
+            <a
+              href="venues.html"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-havillaHoverBlue transition-all duration-200"
+            >
+              <i class="fa-solid fa-building w-5 text-center text-base"></i>
+              <span>Venues</span>
+            </a>
+            <a
+              href="bookings.html"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium border border-white/10 bg-havillaActiveBlue text-white transition-all duration-200"
+            >
+              <i
+                class="fa-solid fa-calendar-check w-5 text-center text-base"
+              ></i>
+              <span>Bookings</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-havillaHoverBlue transition-all duration-200"
+            >
+              <i class="fa-solid fa-calendar w-5 text-center text-base"></i>
+              <span>Calendar</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-havillaHoverBlue transition-all duration-200"
+            >
+              <i class="fa-solid fa-quote-left w-5 text-center text-base"></i>
+              <span>Quotes</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-havillaHoverBlue transition-all duration-200"
+            >
+              <i class="fa-regular fa-star w-5 text-center text-base"></i>
+              <span>Reviews</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-havillaHoverBlue transition-all duration-200"
+            >
+              <i class="fa-solid fa-chart-line w-5 text-center text-base"></i>
+              <span>Analytics</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-havillaHoverBlue transition-all duration-200"
+            >
+              <i class="fa-regular fa-message w-5 text-center text-base"></i>
+              <span>Messages</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-havillaHoverBlue transition-all duration-200"
+            >
+              <i class="fa-solid fa-money-bill w-5 text-center text-base"></i>
+              <span>Payments</span>
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-havillaHoverBlue transition-all duration-200"
+            >
+              <i class="fa-solid fa-gear w-5 text-center text-base"></i>
+              <span>Settings</span>
+            </a>
+          </nav>
+        </div>
+
+        <div
+          class="flex items-center gap-3 border-t border-white/10 pt-5 mt-6 mb-4 md:mb-0"
+        >
+          <img
+            src="https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1775954628/image-jonathan_iv05sh.jpg"
+            alt="Profile Avatar"
+            class="w-11 h-11 rounded-full object-cover ring-2 ring-white/5"
+          />
+          <div>
+            <h4 class="text-xs font-semibold tracking-wide text-white">
+              Ademola Adeyemi
+            </h4>
+            <p class="text-[10px] text-slate-400 mt-0.5">The Grand Pavilion</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Operational Dashboard Container Area -->
+      <main
+        class="flex-1 min-w-0 p-4 sm:p-6 lg:p-8 bg-white flex flex-col justify-between"
+      >
+        <div>
+          <!-- Title & Top Search / Action Controls Bar -->
+          <div
+            class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6"
+          >
+            <div>
+              <h2 class="text-xl font-bold text-slate-900 tracking-tight">
+                Admin Dashboard
+              </h2>
+              <p class="text-xs text-slate-400 mt-0.5">
+                Manage and track all your venue bookings in one place.
+              </p>
+            </div>
+
+            <div
+              class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto"
+            >
+              <div class="relative w-full sm:w-72">
+                <i
+                  class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"
+                ></i>
+                <input
+                  type="text"
+                  id="bookingSearch"
+                  oninput="handleBookingSearch(this.value)"
+                  placeholder="Search"
+                  class="w-full h-10 pl-10 pr-4 border border-slate-200 rounded-lg text-xs outline-none focus:border-havillaNavy transition-all text-slate-700 placeholder-slate-400 bg-white"
+                />
+              </div>
+              <button
+                onclick="toggleBookingModal(true)"
+                class="bg-[#0b335c] hover:bg-havillaNavy text-white px-5 h-10 rounded-lg flex items-center justify-center gap-2 text-xs font-medium transition-colors cursor-pointer w-full sm:w-auto whitespace-nowrap shadow-xs"
+              >
+                <i class="fa-solid fa-plus text-[10px]"></i>
+                New Booking
+              </button>
+            </div>
+          </div>
+
+          <!-- Summary Analytics Metric Cards Row Group -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+          >
+            <!-- Card 1: Total Bookings -->
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 flex items-start gap-4 shadow-xs"
+            >
+              <div
+                class="p-2.5 bg-purple-50 text-purple-600 rounded-lg text-base flex items-center justify-center"
+              >
+                <i class="fa-regular fa-calendar-days"></i>
+              </div>
+              <div>
+                <p
+                  class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"
+                >
+                  Total Bookings
+                </p>
+                <h3
+                  id="metricTotal"
+                  class="text-xl font-bold text-slate-900 mt-0.5"
+                >
+                  128
+                </h3>
+                <p
+                  class="text-[10px] text-slate-400 mt-1 flex items-center gap-1"
+                >
+                  <span class="text-emerald-500 font-semibold flex items-center"
+                    ><i class="fa-solid fa-arrow-up text-[8px] mr-0.5"></i
+                    >18.6%</span
+                  >
+                  from last month
+                </p>
+              </div>
+            </div>
+            <!-- Card 2: Confirmed -->
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 flex items-start gap-4 shadow-xs"
+            >
+              <div
+                class="p-2.5 bg-emerald-50 text-emerald-600 rounded-lg text-base flex items-center justify-center"
+              >
+                <i class="fa-regular fa-circle-check"></i>
+              </div>
+              <div>
+                <p
+                  class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"
+                >
+                  Confirmed
+                </p>
+                <h3
+                  id="metricConfirmed"
+                  class="text-xl font-bold text-slate-900 mt-0.5"
+                >
+                  84
+                </h3>
+                <p
+                  class="text-[10px] text-slate-400 mt-1 flex items-center gap-1"
+                >
+                  <span class="text-emerald-500 font-semibold flex items-center"
+                    ><i class="fa-solid fa-arrow-up text-[8px] mr-0.5"></i
+                    >16.2%</span
+                  >
+                  from last month
+                </p>
+              </div>
+            </div>
+            <!-- Card 3: Pending -->
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 flex items-start gap-4 shadow-xs"
+            >
+              <div
+                class="p-2.5 bg-amber-50 text-amber-500 rounded-lg text-base flex items-center justify-center"
+              >
+                <i class="fa-regular fa-clock"></i>
+              </div>
+              <div>
+                <p
+                  class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"
+                >
+                  Pending
+                </p>
+                <h3
+                  id="metricPending"
+                  class="text-xl font-bold text-slate-900 mt-0.5"
+                >
+                  28
+                </h3>
+                <p
+                  class="text-[10px] text-slate-400 mt-1 flex items-center gap-1"
+                >
+                  <span class="text-rose-500 font-semibold flex items-center"
+                    ><i class="fa-solid fa-arrow-down text-[8px] mr-0.5"></i
+                    >8.3%</span
+                  >
+                  from last month
+                </p>
+              </div>
+            </div>
+            <!-- Card 4: Cancelled -->
+            <div
+              class="bg-white border border-slate-100 rounded-xl p-4 flex items-start gap-4 shadow-xs"
+            >
+              <div
+                class="p-2.5 bg-rose-50 text-rose-500 rounded-lg text-base flex items-center justify-center"
+              >
+                <i class="fa-regular fa-circle-xmark"></i>
+              </div>
+              <div>
+                <p
+                  class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider"
+                >
+                  Cancelled
+                </p>
+                <h3
+                  id="metricCancelled"
+                  class="text-xl font-bold text-slate-900 mt-0.5"
+                >
+                  16
+                </h3>
+                <p
+                  class="text-[10px] text-slate-400 mt-1 flex items-center gap-1"
+                >
+                  <span class="text-rose-500 font-semibold flex items-center"
+                    ><i class="fa-solid fa-arrow-down text-[8px] mr-0.5"></i
+                    >12.4%</span
+                  >
+                  from last month
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Categories Tab Operations & Sorting Menu Panel Control Layout -->
+          <div
+            class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-100 pb-px mb-5 gap-4 relative"
+          >
+            <div
+              class="flex items-center gap-6 overflow-x-auto whitespace-nowrap scrollbar-hide -mb-px"
+              id="bookingTabContainer"
+            >
+              <button
+                onclick="switchBookingTab('all')"
+                id="tab-b-all"
+                class="px-1 py-3 text-xs font-semibold text-[#0b335c] border-b-2 border-[#0b335c] transition-all cursor-pointer"
+              >
+                All Bookings
+              </button>
+              <button
+                onclick="switchBookingTab('confirmed')"
+                id="tab-b-confirmed"
+                class="px-1 py-3 text-xs text-slate-400 font-medium hover:text-slate-600 transition-colors cursor-pointer"
+              >
+                Confirmed
+              </button>
+              <button
+                onclick="switchBookingTab('pending')"
+                id="tab-b-pending"
+                class="px-1 py-3 text-xs text-slate-400 font-medium hover:text-slate-600 transition-colors cursor-pointer"
+              >
+                Pending
+              </button>
+              <button
+                onclick="switchBookingTab('cancelled')"
+                id="tab-b-cancelled"
+                class="px-1 py-3 text-xs text-slate-400 font-medium hover:text-slate-600 transition-colors cursor-pointer"
+              >
+                Cancelled
+              </button>
+              <button
+                onclick="switchBookingTab('draft')"
+                id="tab-b-draft"
+                class="px-1 py-3 text-xs text-slate-400 font-medium hover:text-slate-600 transition-colors cursor-pointer"
+              >
+                Draft
+              </button>
+            </div>
+
+            <div
+              class="relative inline-block text-left self-end sm:self-auto mb-1"
+            >
+              <button
+                onclick="toggleBookingSortDropdown()"
+                id="bSortDropdownButton"
+                class="border border-slate-200 bg-white hover:bg-slate-50 px-3 h-9 rounded-lg text-xs font-medium text-slate-600 flex items-center gap-2 cursor-pointer transition-colors"
+              >
+                <i
+                  class="fa-solid fa-arrow-down-short-wide text-slate-400 text-[11px]"
+                ></i>
+                <span id="currentBSortLabel">Sort by: Newest</span>
+                <i
+                  class="fa-solid fa-chevron-down text-[9px] text-slate-400 ml-0.5"
+                ></i>
+              </button>
+              <div
+                id="bookingSortMenu"
+                class="hidden absolute right-0 mt-1 w-44 bg-white border border-slate-100 rounded-xl shadow-lg py-1 z-30 text-xs text-slate-600"
+              >
+                <button
+                  onclick="executeBookingSort('newest', 'Sort by: Newest')"
+                  class="w-full text-left px-4 py-2 hover:bg-slate-50 transition-colors cursor-pointer block font-medium"
+                >
+                  Newest
+                </button>
+                <button
+                  onclick="executeBookingSort('oldest', 'Sort by: Oldest')"
+                  class="w-full text-left px-4 py-2 hover:bg-slate-50 transition-colors cursor-pointer block"
+                >
+                  Oldest
+                </button>
+                <button
+                  onclick="
+                    executeBookingSort('amount-high', 'Amount: High to Low')
+                  "
+                  class="w-full text-left px-4 py-2 hover:bg-slate-50 transition-colors cursor-pointer block"
+                >
+                  Amount: High to Low
+                </button>
+                <button
+                  onclick="
+                    executeBookingSort('amount-low', 'Amount: Low to High')
+                  "
+                  class="w-full text-left px-4 py-2 hover:bg-slate-50 transition-colors cursor-pointer block"
+                >
+                  Amount: Low to High
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fluid Table Container Structuring (Matches the Image Columns Exactly) -->
+          <div class="w-full overflow-x-auto scrollbar-hide">
+            <table
+              class="w-full text-left border-collapse table-auto min-w-[800px]"
+            >
+              <thead>
+                <tr
+                  class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 border-b border-slate-100"
+                >
+                  <th class="pb-3 pt-1 px-4 font-medium">Booking ID</th>
+                  <th class="pb-3 pt-1 px-4 font-medium">Customer</th>
+                  <th class="pb-3 pt-1 px-4 font-medium">Venue</th>
+                  <th class="pb-3 pt-1 px-4 font-medium">Date & Time</th>
+                  <th class="pb-3 pt-1 px-4 font-medium">Guests</th>
+                  <th class="pb-3 pt-1 px-4 font-medium">Amount</th>
+                  <th class="pb-3 pt-1 px-4 font-medium">Status</th>
+                  <th class="pb-3 pt-1 px-4 font-medium text-right pr-6">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                id="bookingTableBody"
+                class="divide-y divide-slate-100/70 text-xs text-slate-600"
+              >
+                <!-- Javascript will inject data rows matching the look of image here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pagination Bar Panel System Control Links -->
+        <div
+          class="flex flex-col sm:flex-row items-center justify-between border-t border-slate-100 pt-5 mt-6 gap-4 text-slate-400 text-xs font-medium"
+        >
+          <span id="bookingPaginationInfo">Showing 1 to 7 of 200 bookings</span>
+          <div
+            class="flex items-center gap-1.5"
+            id="bookingPaginationControls"
+          ></div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Context Modal Window: Add/Edit Booking Form Layout -->
+    <div
+      id="bookingModal"
+      class="hidden fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50"
+    >
+      <div
+        class="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 flex flex-col max-h-[90vh]"
+      >
+        <div
+          class="p-5 border-b border-slate-100 flex items-center justify-between"
+        >
+          <h3
+            id="bModalTitle"
+            class="text-xs font-semibold text-slate-900 uppercase tracking-wider"
+          >
+            New Booking Record
+          </h3>
+          <button
+            onclick="toggleBookingModal(false)"
+            class="text-slate-400 hover:text-slate-600 transition-colors text-base p-1 cursor-pointer"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <form
+          id="bookingForm"
+          onsubmit="handleBookingFormSubmit(event)"
+          class="p-5 space-y-4 overflow-y-auto flex-1"
+        >
+          <input type="hidden" id="editBookingId" />
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label
+                class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wide"
+                >Customer Name</label
+              >
+              <input
+                type="text"
+                id="bFormName"
+                required
+                placeholder="John & Mary's wedding"
+                class="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:border-havillaNavy focus:bg-white transition-all"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wide"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="bFormEmail"
+                required
+                placeholder="johnmary@gmail.com"
+                class="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:border-havillaNavy focus:bg-white transition-all"
+              />
+            </div>
+          </div>
+          <div>
+            <label
+              class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wide"
+              >Venue Selection</label
+            >
+            <select
+              id="bFormVenue"
+              class="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:border-havillaNavy focus:bg-white transition-all"
+            >
+              <option value="The Grand pavilion">The Grand pavilion</option>
+              <option value="Eko Atlantic Centre">Eko Atlantic Centre</option>
+              <option value="The Monarch Hall">The Monarch Hall</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label
+                class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wide"
+                >Amount (₦)</label
+              >
+              <input
+                type="number"
+                id="bFormAmount"
+                required
+                placeholder="300000"
+                class="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:border-havillaNavy focus:bg-white transition-all"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wide"
+                >Guests Count</label
+              >
+              <input
+                type="number"
+                id="bFormGuests"
+                required
+                placeholder="500"
+                class="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:border-havillaNavy focus:bg-white transition-all"
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label
+                class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wide"
+                >Booking Date</label
+              >
+              <input
+                type="date"
+                id="bFormDate"
+                required
+                class="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:border-havillaNavy focus:bg-white transition-all"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-xs font-medium text-slate-400 mb-1.5 uppercase tracking-wide"
+                >Status</label
+              >
+              <select
+                id="bFormStatus"
+                class="w-full h-10 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:border-havillaNavy focus:bg-white transition-all"
+              >
+                <option value="Confirmed">Confirmed</option>
+                <option value="Pending">Pending</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Draft">Draft</option>
+              </select>
+            </div>
+          </div>
+          <div
+            class="flex items-center justify-end gap-2 border-t border-slate-50 pt-4 mt-2"
+          >
+            <button
+              type="button"
+              onclick="toggleBookingModal(false)"
+              class="px-4 h-10 bg-slate-100 hover:bg-slate-200 text-slate-600 font-medium rounded-xl text-xs transition-colors cursor-pointer"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="px-4 h-10 bg-havillaNavy text-white font-medium rounded-xl text-xs shadow-sm transition-colors cursor-pointer"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Core Dynamic Operational Automation Engine -->
+    <script>
+      let bookings = [];
+      let currentBTab = "all";
+      let currentBPage = 1;
+      const itemsPerBPage = 7;
+      let bSearchQuery = "";
+      let bSortMethod = "newest";
+
+      function toggleMobileMenu() {
+        const sidebar = document.getElementById("sidebar");
+        const icon = document.getElementById("menuIcon");
+        if (sidebar.classList.contains("hidden")) {
+          sidebar.classList.remove("hidden");
+          sidebar.classList.add("flex");
+          icon.className = "fa-solid fa-xmark";
+        } else {
+          sidebar.classList.add("hidden");
+          sidebar.classList.remove("flex");
+          icon.className = "fa-solid fa-bars";
+        }
+      }
+
+      function generateBookingData() {
+        // Base structure setup matching image profiles
+        const mockCustomer = "John & Mary's wedding";
+        const mockEmail = "johnmary@gmail.com";
+        const mockVenue = "The Grand pavilion";
+        const baseTimestamp = 1779624000000; // May 2026
+
+        const operationalStatuses = [
+          "Confirmed",
+          "Cancelled",
+          "Confirmed",
+          "Pending",
+          "Confirmed",
+          "Confirmed",
+          "Confirmed",
+        ];
+
+        // Generates rows replicating image visuals perfectly
+        for (let i = 0; i < 200; i++) {
+          let determinedStatus =
+            operationalStatuses[i % operationalStatuses.length];
+          if (i === 11 || i === 18) determinedStatus = "Draft";
+
+          bookings.push({
+            id: i + 1,
+            bookingId: `#VB000128`,
+            timestamp: baseTimestamp - i * 3600000 * 4,
+            customerName: mockCustomer,
+            customerEmail: mockEmail,
+            venue: mockVenue,
+            guests: 500,
+            amount: 300000,
+            status: determinedStatus,
+            avatar:
+              "https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1775954628/image-jonathan_iv05sh.jpg",
+          });
+        }
+        updateMetricSummaryCards();
+      }
+
+      function updateMetricSummaryCards() {
+        const total = bookings.length;
+        const confirmed = bookings.filter(
+          (b) => b.status === "Confirmed",
+        ).length;
+        const pending = bookings.filter((b) => b.status === "Pending").length;
+        const cancelled = bookings.filter(
+          (b) => b.status === "Cancelled",
+        ).length;
+
+        document.getElementById("metricTotal").innerText = total;
+        document.getElementById("metricConfirmed").innerText = confirmed;
+        document.getElementById("metricPending").innerText = pending;
+        document.getElementById("metricCancelled").innerText = cancelled;
+      }
+
+      function toggleBookingSortDropdown() {
+        document.getElementById("bookingSortMenu").classList.toggle("hidden");
+      }
+
+      function executeBookingSort(method, textLabel) {
+        bSortMethod = method;
+        document.getElementById("currentBSortLabel").innerText = textLabel;
+        document.getElementById("bookingSortMenu").classList.add("hidden");
+        currentBPage = 1;
+        renderBookingTable();
+      }
+
+      function handleBookingSearch(val) {
+        bSearchQuery = val;
+        currentBPage = 1;
+        renderBookingTable();
+      }
+
+      function switchBookingTab(targetTab) {
+        currentBTab = targetTab;
+        const subTabs = ["all", "confirmed", "pending", "cancelled", "draft"];
+        subTabs.forEach((t) => {
+          const element = document.getElementById(`tab-b-${t}`);
+          if (t === targetTab) {
+            element.className =
+              "px-1 py-3 text-xs font-semibold text-[#0b335c] border-b-2 border-[#0b335c] transition-all cursor-pointer";
+          } else {
+            element.className =
+              "px-1 py-3 text-xs text-slate-400 font-medium hover:text-slate-600 transition-colors cursor-pointer";
+          }
+        });
+        currentBPage = 1;
+        renderBookingTable();
+      }
+
+      function toggleBookingModal(show) {
+        const targetModal = document.getElementById("bookingModal");
+        if (show) {
+          targetModal.classList.remove("hidden");
+          document.getElementById("bModalTitle").innerText =
+            "New Booking Record";
+          document.getElementById("bookingForm").reset();
+          document.getElementById("editBookingId").value = "";
+        } else {
+          targetModal.classList.add("hidden");
+        }
+      }
+
+      function triggerInlineEdit(id) {
+        const instance = bookings.find((b) => b.id === id);
+        if (!instance) return;
+        document.getElementById("bookingModal").classList.remove("hidden");
+        document.getElementById("bModalTitle").innerText =
+          "Modify Booking Status Elements";
+        document.getElementById("editBookingId").value = instance.id;
+        document.getElementById("bFormName").value = instance.customerName;
+        document.getElementById("bFormEmail").value = instance.customerEmail;
+        document.getElementById("bFormVenue").value = instance.venue;
+        document.getElementById("bFormAmount").value = instance.amount;
+        document.getElementById("bFormGuests").value = instance.guests;
+        document.getElementById("bFormStatus").value = instance.status;
+      }
+
+      function triggerInlineDelete(id) {
+        if (
+          confirm("Are you sure you want to remove this booking ledger entry?")
+        ) {
+          bookings = bookings.filter((b) => b.id !== id);
+          updateMetricSummaryCards();
+          renderBookingTable();
+        }
+      }
+
+      function handleBookingFormSubmit(e) {
+        e.preventDefault();
+        const id = document.getElementById("editBookingId").value;
+        const customerName = document.getElementById("bFormName").value;
+        const customerEmail = document.getElementById("bFormEmail").value;
+        const venue = document.getElementById("bFormVenue").value;
+        const amount = parseFloat(document.getElementById("bFormAmount").value);
+        const guests = parseInt(document.getElementById("bFormGuests").value);
+        const status = document.getElementById("bFormStatus").value;
+
+        if (id) {
+          const match = bookings.find((b) => b.id == id);
+          if (match) {
+            match.customerName = customerName;
+            match.customerEmail = customerEmail;
+            match.venue = venue;
+            match.amount = amount;
+            match.guests = guests;
+            match.status = status;
+          }
+        } else {
+          bookings.unshift({
+            id: Date.now(),
+            bookingId: `#VB000128`,
+            timestamp: Date.now(),
+            customerName,
+            customerEmail,
+            venue,
+            amount,
+            guests,
+            status,
+            avatar:
+              "https://res.cloudinary.com/dxrofw0et/image/upload/q_auto/f_auto/v1775954628/image-jonathan_iv05sh.jpg",
+          });
+        }
+        document.getElementById("bookingForm").reset(); // Clear the form
+        document.getElementById("editBookingId").value = "";
+        toggleBookingModal(false);
+        updateMetricSummaryCards();
+        renderBookingTable();
+      }
+
+      function renderBookingTable() {
+        let processSet = [...bookings];
+
+        if (currentBTab !== "all") {
+          processSet = processSet.filter(
+            (b) => b.status.toLowerCase() === currentBTab,
+          );
+        }
+
+        if (bSearchQuery.trim() !== "") {
+          const filterKeyword = bSearchQuery.toLowerCase();
+          processSet = processSet.filter(
+            (b) =>
+              b.bookingId.toLowerCase().includes(filterKeyword) ||
+              b.customerName.toLowerCase().includes(filterKeyword) ||
+              b.customerEmail.toLowerCase().includes(filterKeyword) ||
+              b.venue.toLowerCase().includes(filterKeyword),
+          );
+        }
+
+        if (bSortMethod === "newest")
+          processSet.sort((a, b) => b.timestamp - a.timestamp);
+        else if (bSortMethod === "oldest")
+          processSet.sort((a, b) => a.timestamp - b.timestamp);
+        else if (bSortMethod === "amount-high")
+          processSet.sort((a, b) => b.amount - a.amount);
+        else if (bSortMethod === "amount-low")
+          processSet.sort((a, b) => a.amount - b.amount);
+
+        const absoluteTotal = processSet.length;
+        const maximumPages = Math.ceil(absoluteTotal / itemsPerBPage) || 1;
+        if (currentBPage > maximumPages) currentBPage = maximumPages;
+
+        const startIndex = (currentBPage - 1) * itemsPerBPage;
+        const endIndex = Math.min(startIndex + itemsPerBPage, absoluteTotal);
+        const computationalSlice = processSet.slice(startIndex, endIndex);
+
+        document.getElementById("bookingPaginationInfo").innerText =
+          absoluteTotal === 0
+            ? "Showing 0 to 0 of 0 bookings"
+            : `Showing ${startIndex + 1} to ${endIndex} of ${absoluteTotal} bookings`;
+
+        const bodyContainer = document.getElementById("bookingTableBody");
+        bodyContainer.innerHTML = "";
+
+        if (computationalSlice.length === 0) {
+          bodyContainer.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400">No matching booking logs present.</td></tr>`;
+          document.getElementById("bookingPaginationControls").innerHTML = "";
+          return;
+        }
+
+        computationalSlice.forEach((booking) => {
+          let stateStyleClass = "bg-emerald-50 text-emerald-600";
+          if (booking.status === "Pending")
+            stateStyleClass = "bg-amber-50 text-amber-500";
+          if (booking.status === "Cancelled")
+            stateStyleClass = "bg-rose-50 text-rose-500";
+          if (booking.status === "Draft")
+            stateStyleClass = "bg-slate-100 text-slate-500";
+
+          const trElement = document.createElement("tr");
+          trElement.className =
+            "hover:bg-slate-50/60 transition-colors border-b border-slate-100/70";
+          trElement.innerHTML = `
+            <td class="p-4 font-medium text-slate-400 select-all">${booking.bookingId}</td>
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <img src="${booking.avatar}" class="w-8 h-8 rounded-full object-cover shrink-0 ring-1 ring-slate-100" />
+                <div class="min-w-0">
+                  <div class="font-bold text-slate-800 text-[13px] leading-tight">${booking.customerName}</div>
+                  <div class="text-[10px] text-slate-400 tracking-wide mt-0.5">${booking.customerEmail}</div>
+                </div>
+              </div>
+            </td>
+            <td class="p-4 text-slate-600 font-medium whitespace-nowrap">${booking.venue}</td>
+            <td class="p-4 whitespace-nowrap">
+              <div class="text-slate-700 font-medium">24 May 2026</div>
+              <div class="text-[10px] text-slate-400 font-medium mt-0.5">12:00 PM - 6:00 PM</div>
+            </td>
+            <td class="p-4 text-slate-500 font-medium">${booking.guests}</td>
+            <td class="p-4 font-bold text-slate-900 whitespace-nowrap">₦${booking.amount.toLocaleString()}</td>
+            <td class="p-4 whitespace-nowrap">
+              <span class="px-2.5 py-1 rounded-md text-[10px] font-bold tracking-wide ${stateStyleClass}">${booking.status}</span>
+            </td>
+            <td class="p-4 text-right pr-6 whitespace-nowrap">
+              <div class="inline-flex items-center gap-1.5">
+                <button onclick="triggerInlineEdit(${booking.id})" class="w-7 h-7 flex items-center justify-center border border-slate-200 text-slate-400 hover:text-havillaNavy hover:bg-slate-50 rounded-lg transition-all cursor-pointer" title="Edit Properties"><i class="fa-solid fa-ellipsis text-xs"></i></button>
+                <button onclick="triggerInlineDelete(${booking.id})" class="w-7 h-7 flex items-center justify-center border border-slate-200 text-slate-400 hover:text-rose-600 hover:bg-slate-50 rounded-lg transition-all cursor-pointer" title="Delete Log"><i class="fa-regular fa-trash-can text-xs"></i></button>
+              </div>
+            </td>
+          `;
+          bodyContainer.appendChild(trElement);
+        });
+
+        // Pagination Controllers
+        const panelControls = document.getElementById(
+          "bookingPaginationControls",
+        );
+        panelControls.innerHTML = "";
+
+        const leftActionBtn = document.createElement("button");
+        leftActionBtn.disabled = currentBPage === 1;
+        leftActionBtn.className = `w-7 h-7 flex items-center justify-center border border-slate-200 rounded-lg transition-colors cursor-pointer text-slate-500 ${currentBPage === 1 ? "opacity-30 cursor-not-allowed bg-slate-50" : "hover:bg-slate-50"}`;
+        leftActionBtn.innerHTML = `<i class="fa-solid fa-chevron-left text-[9px]"></i>`;
+        leftActionBtn.onclick = () => {
+          currentBPage--;
+          renderBookingTable();
+        };
+        panelControls.appendChild(leftActionBtn);
+
+        // Display page numbers
+        for (let idx = 1; idx <= maximumPages; idx++) {
+          if (
+            idx === 1 ||
+            idx === maximumPages ||
+            (idx >= currentBPage - 1 && idx <= currentBPage + 1)
+          ) {
+            const pageToggle = document.createElement("button");
+            pageToggle.className = `w-7 h-7 text-[10px] font-bold rounded-lg transition-colors cursor-pointer ${currentBPage === idx ? "bg-[#0b335c] text-white shadow-xs" : "border border-slate-200 text-slate-600 hover:bg-slate-50"}`;
+            pageToggle.innerText = idx;
+            pageToggle.onclick = () => {
+              currentBPage = idx;
+              renderBookingTable();
+            };
+            panelControls.appendChild(pageToggle);
+          } else if (idx === 2 || idx === maximumPages - 1) {
+            const separatorDot = document.createElement("span");
+            separatorDot.className = "px-1 text-slate-300 text-xs select-none";
+            separatorDot.innerText = "...";
+            panelControls.appendChild(separatorDot);
+          }
+        }
+
+        const rightActionBtn = document.createElement("button");
+        rightActionBtn.disabled = currentBPage === maximumPages;
+        rightActionBtn.className = `w-7 h-7 flex items-center justify-center border border-slate-200 rounded-lg transition-colors cursor-pointer text-slate-500 ${currentBPage === maximumPages ? "opacity-30 cursor-not-allowed bg-slate-50" : "hover:bg-slate-50"}`;
+        rightActionBtn.innerHTML = `<i class="fa-solid fa-chevron-right text-[9px]"></i>`;
+        rightActionBtn.onclick = () => {
+          currentBPage++;
+          renderBookingTable();
+        };
+        panelControls.appendChild(rightActionBtn);
+      }
+    </script>
+  </body>
+</html>

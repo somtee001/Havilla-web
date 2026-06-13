@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Success | Havilla</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-[#f6f8fb] min-h-screen flex items-center justify-center p-4">
+    <div
+      class="bg-white rounded-2xl shadow-sm border border-gray-100 w-full max-w-md p-8 text-center"
+    >
+      <div class="flex justify-center mb-6">
+        <img
+          src="../assets/images/verification-success.png"
+          alt="Success Mark"
+          class="w-40 h-auto object-contain"
+        />
+      </div>
+
+      <div class="mb-8">
+        <h2 id="successHeading" class="text-xl font-bold text-[#072447]">
+          Process Completed
+        </h2>
+        <p
+          id="successDescription"
+          class="text-xs text-gray-500 mt-2 leading-relaxed"
+        >
+          Your recent profile security adjustments or registration procedures
+          were successfully synced into Havilla.
+        </p>
+      </div>
+
+      <button
+        id="actionButton"
+        onclick="finishFlow()"
+        class="w-full h-11 bg-[#072447] hover:bg-[#0d2d56] text-white rounded-xl text-sm font-semibold shadow-sm transition-colors duration-150"
+      >
+        Continue to Account
+      </button>
+    </div>
+
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const currentFlow = urlParams.get("flow") || "signup";
+
+      const successHeading = document.getElementById("successHeading");
+      const successDescription = document.getElementById("successDescription");
+      const actionButton = document.getElementById("actionButton");
+
+      if (currentFlow === "signup") {
+        successHeading.textContent = "Welcome to Havilla!";
+        successDescription.textContent =
+          "Your registration is officially complete! You can now log into your specialized corporate workspace portal ecosystem.";
+        actionButton.textContent = "Login to Platform Panel";
+      } else {
+        successHeading.textContent = "Password Reset Successful";
+        successDescription.textContent =
+          "Your account safety access key parameters have been securely modified. You can now use your updated password data nodes to reconnect safely.";
+        actionButton.textContent = "Return to Sign In";
+      }
+
+      function finishFlow() {
+        // Returns both workflows back to login initialization point for absolute backend safety validation sequences
+        window.location.href = "signin.html";
+      }
+    </script>
+  </body>
+</html>
